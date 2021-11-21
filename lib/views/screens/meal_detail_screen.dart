@@ -1,18 +1,112 @@
 import 'package:flutter/material.dart';
 import 'package:meals/ext/build_context_extensions.dart';
+import 'package:meals/models/meal.dart';
 
 class MealDetailScreen extends StatelessWidget {
   const MealDetailScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final title = context.getArgument<String>('title');
+    final meal = context.getArgument<Meal>();
 
     return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Text(title),
+      appBar: AppBar(
+        title: Text(
+          meal.title,
+        ),
       ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              width: double.infinity,
+              child: Image.network(
+                meal.imageUrl,
+                fit: BoxFit.cover,
+              ),
+            ),
+            _buildIngredients(context, meal),
+            _buildSteps(context, meal),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildIngredients(BuildContext context, Meal meal) {
+    return Column(
+      children: [
+        _buildName(context, 'Ingredients'),
+        _buildContainer(
+          context,
+          ListView.builder(
+            itemCount: meal.ingredients.length,
+            itemBuilder: (c, i) => Card(
+              color: Theme.of(context).colorScheme.secondary,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  meal.ingredients[i],
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSteps(BuildContext context, Meal meal) {
+    return Column(
+      children: [
+        _buildName(context, 'Steps'),
+        _buildContainer(
+          context,
+          ListView.builder(
+            itemCount: meal.steps.length,
+            itemBuilder: (c, i) => Column(
+              children: [
+                ListTile(
+                  leading: CircleAvatar(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    child: Text('${i + 1}'),
+                  ),
+                  title: Text(meal.steps[i]),
+                ),
+                const Divider(),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildName(BuildContext context, String name) {
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10),
+      child: Text(
+        name,
+        style: Theme.of(context).textTheme.headline6,
+      ),
+    );
+  }
+
+  Widget _buildContainer(BuildContext context, Widget child) {
+    return Container(
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: Colors.grey,
+        ),
+      ),
+      width: 350,
+      height: 300,
+      child: child,
     );
   }
 }

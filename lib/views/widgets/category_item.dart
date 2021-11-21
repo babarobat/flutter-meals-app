@@ -1,29 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:meals/models/category.dart';
 import 'package:meals/routs/routs.dart';
 
-import '../screens/category_meals_screen.dart';
-
 class CategoryItem extends StatelessWidget {
-  final String title;
-  final Color color;
-  final String id;
+  final Category category;
 
   const CategoryItem({
     Key? key,
-    this.title = "category item",
-    this.color = Colors.white,
-    required this.id,
+    required this.category,
   }) : super(key: key);
 
   void _openMealsScreen(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      Routs.categoryMeals,
-      arguments: {
-        'title': title,
-        'id': id,
-      },
-    );
+    Navigator.pushNamed(context, Routs.categoryMeals, arguments: category);
   }
 
   @override
@@ -35,14 +23,14 @@ class CategoryItem extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         child: Text(
-          title,
+          category.title,
           style: Theme.of(context).textTheme.headline6,
         ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              color.withOpacity(0.7),
-              color,
+              category.color.withOpacity(0.7),
+              category.color,
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,

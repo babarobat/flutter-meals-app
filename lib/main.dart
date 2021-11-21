@@ -21,7 +21,7 @@ class App extends StatelessWidget {
       theme: theme.copyWith(
           colorScheme: theme.colorScheme.copyWith(
             primary: const Color(0xFF125BFF),
-            secondary: Colors.amber,
+            secondary: const Color(0xFFD7ECFE),
           ),
           canvasColor: const Color.fromRGBO(255, 254, 229, 1),
           textTheme: theme.textTheme.copyWith(

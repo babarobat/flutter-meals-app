@@ -4,25 +4,14 @@ import 'package:meals/models/meal.dart';
 import 'package:meals/routs/routs.dart';
 
 class MealItem extends StatelessWidget {
-  final String title;
-  final String imageUrl;
-  final int duration;
-  final Complexity complexity;
-  final Affordability affordability;
+  final Meal meal;
 
-  const MealItem({
-    Key? key,
-    required this.title,
-    required this.imageUrl,
-    required this.duration,
-    required this.complexity,
-    required this.affordability,
-  }) : super(key: key);
+  const MealItem(this.meal, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=> {_onTap(context)},
+      onTap: () => {_onTap(context)},
       child: Card(
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -39,7 +28,7 @@ class MealItem extends StatelessWidget {
                     topRight: Radius.circular(15),
                   ),
                   child: Image.network(
-                    imageUrl,
+                    meal.imageUrl,
                     height: 250,
                     width: double.infinity,
                     fit: BoxFit.cover,
@@ -56,7 +45,7 @@ class MealItem extends StatelessWidget {
                     width: 300,
                     color: Colors.black54,
                     child: Text(
-                      title,
+                      meal.title,
                       style: const TextStyle(
                         fontSize: 26,
                         color: Colors.white,
@@ -75,23 +64,33 @@ class MealItem extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.schedule),
+                      Icon(
+                        Icons.schedule,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       const SizedBox(width: 6),
-                      Text('$duration min'),
+                      Text('${meal.duration} min'),
                     ],
                   ),
                   Row(
                     children: [
-                      const Icon(Icons.work),
+                      Icon(
+                        Icons.work,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       const SizedBox(width: 6),
-                      Text(ConvertComplexity.toStringFrom(complexity)),
+                      Text(ConvertComplexity.toStringFrom(meal.complexity)),
                     ],
                   ),
                   Row(
                     children: [
-                      const Icon(Icons.attach_money),
+                      Icon(
+                        Icons.attach_money,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
                       const SizedBox(width: 6),
-                      Text(ConvertAffordability.toStringFrom(affordability)),
+                      Text(ConvertAffordability.toStringFrom(
+                          meal.affordability)),
                     ],
                   ),
                 ],
@@ -104,8 +103,10 @@ class MealItem extends StatelessWidget {
   }
 
   void _onTap(BuildContext context) {
-    Navigator.pushNamed(context, Routs.mealDetail, arguments: {
-      'title': title,
-    });
+    Navigator.pushNamed(
+      context,
+      Routs.mealDetail,
+      arguments: meal,
+    );
   }
 }

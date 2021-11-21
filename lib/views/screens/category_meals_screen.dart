@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:meals/ext/build_context_extensions.dart';
+import 'package:meals/models/category.dart';
 import 'package:meals/models/dummy_data.dart';
 import 'package:meals/models/meal.dart';
 import 'package:meals/views/widgets/meal_item.dart';
@@ -10,28 +11,19 @@ class CategoryMealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final title = context.getArgument<String>('title');
-    final id = context.getArgument<String>('id');
+    final category = context.getArgument<Category>();
     final List<Meal> meals = DUMMY_MEALS
-        .where((element) => element.categories.contains(id))
+        .where((element) => element.categories.contains(category.id))
         .toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(category.title),
       ),
       body: ListView.builder(
         itemCount: meals.length,
         itemBuilder: (ctx, index) {
-          final item = meals[index];
-          return MealItem(
-            key: key,
-            title: item.title,
-            imageUrl: item.imageUrl,
-            duration: item.duration,
-            affordability: item.affordability,
-            complexity: item.complexity,
-          );
+          return MealItem(meals[index]);
         },
       ),
     );
