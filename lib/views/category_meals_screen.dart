@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meals/ext/build_context_extensions.dart';
 import 'package:meals/models/dummy_data.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/views/meal_item.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
   const CategoryMealsScreen({Key? key}) : super(key: key);
@@ -22,7 +23,15 @@ class CategoryMealsScreen extends StatelessWidget {
       body: ListView.builder(
         itemCount: meals.length,
         itemBuilder: (ctx, index) {
-          return Text(meals[index].title);
+          final item = meals[index];
+          return MealItem(
+            key: key,
+            title: item.title,
+            imageUrl: item.imageUrl,
+            duration: item.duration,
+            affordability: item.affordability,
+            complexity: item.complexity,
+          );
         },
       ),
     );
