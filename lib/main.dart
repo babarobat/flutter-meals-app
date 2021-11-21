@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'views/categories_screen.dart';
-import 'views/category_meals_screen.dart';
+import 'views/screens/categories_screen.dart';
+import 'views/screens/category_meals_screen.dart';
 import 'routs/routs.dart';
 
 void main() {
@@ -19,7 +19,7 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       theme: theme.copyWith(
           colorScheme: theme.colorScheme.copyWith(
-            primary: Colors.pink,
+            primary: const Color(0xFF125BFF),
             secondary: Colors.amber,
           ),
           canvasColor: const Color.fromRGBO(255, 254, 229, 1),

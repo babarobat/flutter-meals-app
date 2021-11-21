@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meals/ext/build_context_extensions.dart';
 import 'package:meals/models/dummy_data.dart';
 import 'package:meals/models/meal.dart';
-import 'package:meals/views/meal_item.dart';
+import 'package:meals/views/widgets/meal_item.dart';
 
 class CategoryMealsScreen extends StatelessWidget {
   const CategoryMealsScreen({Key? key}) : super(key: key);
