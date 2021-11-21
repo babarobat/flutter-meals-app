@@ -10,8 +10,8 @@ class CategoryMealsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final String title = context.getArg('title');
-    final String id = context.getArg('id');
+    final title = context.getArgument<String>('title');
+    final id = context.getArgument<String>('id');
     final List<Meal> meals = DUMMY_MEALS
         .where((element) => element.categories.contains(id))
         .toList();
