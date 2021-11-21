@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/routs/routs.dart';
 
 import 'category_meals_screen.dart';
 
@@ -12,19 +13,20 @@ class CategoryItem extends StatelessWidget {
     this.color = Colors.white,
   }) : super(key: key);
 
+  void _openMealsScreen(BuildContext context) {
+    Navigator.pushNamed(
+      context,
+      Routs.categoryMeals,
+      arguments: {
+        'title':title
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) {
-              return const CategoryMealsScreen();
-            },
-          ),
-        ),
-      },
+      onTap: () => {_openMealsScreen(context)},
       splashColor: Theme.of(context).primaryColor,
       borderRadius: BorderRadius.circular(15),
       child: Container(
