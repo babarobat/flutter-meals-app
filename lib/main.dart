@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'categories_screen.dart';
+import 'views/categories_screen.dart';
 
 void main() {
   runApp(App());
