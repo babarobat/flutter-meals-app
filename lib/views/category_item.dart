@@ -6,11 +6,13 @@ import 'category_meals_screen.dart';
 class CategoryItem extends StatelessWidget {
   final String title;
   final Color color;
+  final String id;
 
   const CategoryItem({
     Key? key,
     this.title = "category item",
     this.color = Colors.white,
+    required this.id,
   }) : super(key: key);
 
   void _openMealsScreen(BuildContext context) {
@@ -18,7 +20,8 @@ class CategoryItem extends StatelessWidget {
       context,
       Routs.categoryMeals,
       arguments: {
-        'title':title
+        'title': title,
+        'id': id,
       },
     );
   }
