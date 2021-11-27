@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals/views/screens/favorites_screen.dart';
+import 'package:meals/views/widgets/main_drawer.dart';
 
 import 'categories_screen.dart';
 
@@ -29,9 +30,11 @@ class _TopTabsScreenState extends State<BottomTabsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: _title()),
+      appBar: AppBar(title: _title(),),
       body: _body(),
+      drawer: const MainDrawer(),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Theme.of(context).colorScheme.secondary,
         selectedItemColor: Theme.of(context).primaryColor,
         currentIndex: _selectedTabIndex,
         onTap: _onTap,
