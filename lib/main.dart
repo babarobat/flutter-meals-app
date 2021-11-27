@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meals/views/screens/tabs_screen.dart';
 
 import 'views/screens/categories_screen.dart';
 import 'views/screens/category_meals_screen.dart';
@@ -19,28 +20,29 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: theme.copyWith(
-          colorScheme: theme.colorScheme.copyWith(
-            primary: const Color(0xFF125BFF),
-            secondary: const Color(0xFFD7ECFE),
+        colorScheme: theme.colorScheme.copyWith(
+          primary: const Color(0xFF125BFF),
+          secondary: const Color(0xFFD7ECFE),
+        ),
+        canvasColor: const Color.fromRGBO(255, 254, 229, 1),
+        textTheme: theme.textTheme.copyWith(
+          bodyText1: const TextStyle(
+            color: Color.fromRGBO(20, 51, 51, 1),
           ),
-          canvasColor: const Color.fromRGBO(255, 254, 229, 1),
-          textTheme: theme.textTheme.copyWith(
-            bodyText1: const TextStyle(
-              color: Color.fromRGBO(20, 51, 51, 1),
-            ),
-            bodyText2: const TextStyle(
-              color: Color.fromRGBO(20, 51, 51, 1),
-            ),
-            headline6: const TextStyle(
-              fontFamily: 'RobotoCondensed',
-              color: Color.fromRGBO(20, 51, 51, 1),
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-            ),
-          )),
-      home: const CategoriesScreen(),
+          bodyText2: const TextStyle(
+            color: Color.fromRGBO(20, 51, 51, 1),
+          ),
+          headline6: const TextStyle(
+            fontFamily: 'RobotoCondensed',
+            color: Color.fromRGBO(20, 51, 51, 1),
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
+        ),
+      ),
       routes: {
-        Routs.categories : (ctx) => const CategoriesScreen(),
+        Routs.tabsScreen: (ctx) => const TabsScreen(),
+        Routs.categories: (ctx) => const CategoriesScreen(),
         Routs.categoryMeals: (ctx) => const CategoryMealsScreen(),
         Routs.mealDetail: (ctx) => const MealDetailScreen(),
       },
