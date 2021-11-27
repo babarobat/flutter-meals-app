@@ -5,8 +5,13 @@ import 'package:meals/routs/routs.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
+  final Function(Meal) deleteCallback;
 
-  const MealItem(this.meal, {Key? key}) : super(key: key);
+  const MealItem({
+    Key? key,
+    required this.meal,
+    required this.deleteCallback,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +111,10 @@ class MealItem extends StatelessWidget {
     Navigator.pushNamed(
       context,
       Routs.mealDetail,
-      arguments: meal,
+      arguments: <String, Object>{
+        'meal': meal,
+        'onDeleteClickCallback': deleteCallback,
+      },
     );
   }
 }

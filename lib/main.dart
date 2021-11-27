@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'services/data_service.dart';
 import 'views/screens/bottom_tabs_screen.dart';
 import 'views/screens/categories_screen.dart';
 import 'views/screens/category_meals_screen.dart';
@@ -13,6 +14,7 @@ void main() {
 
 class App extends StatelessWidget {
   final ThemeData theme = ThemeData();
+  final DataService dataService = DataService();
 
   App({Key? key}) : super(key: key);
 
@@ -44,7 +46,7 @@ class App extends StatelessWidget {
       routes: {
         Routs.tabsScreen: (ctx) => const BottomTabsScreen(),
         Routs.categories: (ctx) => const CategoriesScreen(),
-        Routs.categoryMeals: (ctx) => const CategoryMealsScreen(),
+        Routs.categoryMeals: (ctx) => CategoryMealsScreen(dataService: dataService),
         Routs.mealDetail: (ctx) => const MealDetailScreen(),
         Routs.filters: (ctx) => const FiltersScreen(),
       },

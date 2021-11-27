@@ -7,7 +7,9 @@ class MealDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final meal = context.getArgument<Meal>();
+    final meal = context.getArgumentByKey<Meal>('meal');
+    final Function(Meal) onDeleteClickCallback =
+        context.getArgumentByKey<Function(Meal)>('onDeleteClickCallback');
 
     return Scaffold(
       appBar: AppBar(
@@ -18,7 +20,7 @@ class MealDetailScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 300,
               width: double.infinity,
               child: Image.network(
@@ -30,6 +32,14 @@ class MealDetailScreen extends StatelessWidget {
             _buildSteps(context, meal),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).colorScheme.error,
+        child: const Icon(Icons.delete),
+        onPressed: () {
+          onDeleteClickCallback.call(meal);
+          Navigator.pop(context);
+        },
       ),
     );
   }

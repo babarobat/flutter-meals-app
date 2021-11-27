@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 extension BuildContextExtensions on BuildContext {
   T getArgumentByKey<T>(String key) {
-    var args = ModalRoute.of(this)!.settings.arguments as Map<String, T>;
+    var args = ModalRoute.of(this)!.settings.arguments as Map<String, Object>;
     return args[key] as T;
   }
 
