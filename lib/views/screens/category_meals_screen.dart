@@ -20,7 +20,7 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
   @override
   Widget build(BuildContext context) {
     final category = context.getArgument<Category>();
-    final List<Meal> meals = widget.dataService.getAllMealsByCategory(category);
+    final List<Meal> meals = widget.dataService.getAllMealsByCategoryWithFilters(category);
 
     return Scaffold(
       appBar: AppBar(
@@ -31,16 +31,16 @@ class _CategoryMealsScreenState extends State<CategoryMealsScreen> {
         itemBuilder: (ctx, index) {
           return MealItem(
             meal: meals[index],
-            deleteCallback: _deleteMeal,
+            markFavoriteCallback: _markFavorite,
           );
         },
       ),
     );
   }
 
-  void _deleteMeal(Meal meal) {
+  void _markFavorite(Meal meal, bool favorite) {
     setState(() {
-      widget.dataService.deleteMeal(meal);
+      widget.dataService.markFavorite(meal, favorite);
     });
   }
 }

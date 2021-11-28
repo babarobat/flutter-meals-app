@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:meals/ext/build_context_extensions.dart';
 import 'package:meals/models/meal.dart';
+import 'package:meals/services/data_service.dart';
 
-class MealDetailScreen extends StatelessWidget {
-  const MealDetailScreen({Key? key}) : super(key: key);
+class MealDetailScreen extends StatefulWidget {
+  final DataService dataService;
 
+  const MealDetailScreen({Key? key, required this.dataService})
+      : super(key: key);
+
+  @override
+  State<MealDetailScreen> createState() => _MealDetailScreenState();
+}
+
+class _MealDetailScreenState extends State<MealDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final meal = context.getArgumentByKey<Meal>('meal');
-    final Function(Meal) onDeleteClickCallback =
-        context.getArgumentByKey<Function(Meal)>('onDeleteClickCallback');
+    final Function(Meal, bool) markFavoriteCallback =
+        context.getArgumentByKey<Function(Meal, bool)>('markFavoriteCallback');
 
     return Scaffold(
       appBar: AppBar(
@@ -35,10 +44,14 @@ class MealDetailScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Theme.of(context).colorScheme.error,
-        child: const Icon(Icons.delete),
+        child: widget.dataService.isFavorite(meal)
+            ? Icon(Icons.star)
+            : Icon(Icons.star_outline),
         onPressed: () {
-          onDeleteClickCallback.call(meal);
-          Navigator.pop(context);
+          setState(() {
+            markFavoriteCallback.call(
+                meal, !widget.dataService.isFavorite(meal));
+          });
         },
       ),
     );

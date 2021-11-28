@@ -44,10 +44,10 @@ class App extends StatelessWidget {
         ),
       ),
       routes: {
-        Routs.tabsScreen: (ctx) => const BottomTabsScreen(),
+        Routs.tabsScreen: (ctx) =>  BottomTabsScreen(dataService: dataService,),
         Routs.categories: (ctx) => const CategoriesScreen(),
         Routs.categoryMeals: (ctx) => CategoryMealsScreen(dataService: dataService),
-        Routs.mealDetail: (ctx) => const MealDetailScreen(),
+        Routs.mealDetail: (ctx) =>  MealDetailScreen(dataService: dataService,),
         Routs.filters: (ctx) =>  FiltersScreen(dataService: dataService,),
       },
     );

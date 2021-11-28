@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:meals/services/data_service.dart';
 import 'package:meals/views/screens/categories_screen.dart';
 
 import 'favorites_screen.dart';
 
 class TopTabsScreen extends StatefulWidget {
-  const TopTabsScreen({Key? key}) : super(key: key);
+  final DataService dataService;
+  const TopTabsScreen({Key? key, required this.dataService}) : super(key: key);
 
   @override
   _TopTabsScreenState createState() => _TopTabsScreenState();
@@ -31,9 +33,9 @@ class _TopTabsScreenState extends State<TopTabsScreen> {
             ],
           ),
         ),
-        body: const TabBarView(children: [
+        body: TabBarView(children: [
           CategoriesScreen(),
-          FavoritesScreen(),
+          FavoritesScreen( dataService: widget.dataService),
         ],),
       ),
     );

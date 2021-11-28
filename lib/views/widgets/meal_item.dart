@@ -5,12 +5,12 @@ import 'package:meals/routs/routs.dart';
 
 class MealItem extends StatelessWidget {
   final Meal meal;
-  final Function(Meal) deleteCallback;
+  final Function(Meal,bool) markFavoriteCallback;
 
   const MealItem({
     Key? key,
     required this.meal,
-    required this.deleteCallback,
+    required this.markFavoriteCallback,
   }) : super(key: key);
 
   @override
@@ -113,7 +113,7 @@ class MealItem extends StatelessWidget {
       Routs.mealDetail,
       arguments: <String, Object>{
         'meal': meal,
-        'onDeleteClickCallback': deleteCallback,
+        'markFavoriteCallback': markFavoriteCallback,
       },
     );
   }
