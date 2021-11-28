@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:meals/services/data_service.dart';
 import 'package:meals/views/widgets/main_drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
-  const FiltersScreen({Key? key}) : super(key: key);
+  final DataService dataService;
+
+  const FiltersScreen({Key? key, required this.dataService}) : super(key: key);
 
   @override
   _FiltersScreenState createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  var isGlutenFree = false;
-  var isVegan = false;
-  var isVegetarian = false;
-  var isLactoseFree = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class _FiltersScreenState extends State<FiltersScreen> {
                 _lactoseFreeFilter(),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -59,9 +58,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return _filterEntry(
         'gluten free',
         'no gluten ',
-        isGlutenFree,
+        widget.dataService.filter.isGlutenFree,
         (value) => setState(() {
-              isGlutenFree = value;
+              widget.dataService.filter.isGlutenFree = value;
             }));
   }
 
@@ -69,9 +68,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return _filterEntry(
         'vegan',
         'vegan ',
-        isVegan,
+        widget.dataService.filter.isVegan,
         (value) => setState(() {
-              isVegan = value;
+          widget.dataService.filter.isVegan = value;
             }));
   }
 
@@ -79,9 +78,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return _filterEntry(
         'vegetarian',
         'vegetarian ',
-        isVegetarian,
+        widget.dataService.filter.isVegetarian,
         (value) => setState(() {
-              isVegetarian = value;
+          widget.dataService.filter.isVegetarian = value;
             }));
   }
 
@@ -89,9 +88,9 @@ class _FiltersScreenState extends State<FiltersScreen> {
     return _filterEntry(
         'lactose free',
         'lactose free ',
-        isLactoseFree,
+        widget.dataService.filter.isLactoseFree,
         (value) => setState(() {
-              isLactoseFree = value;
+          widget.dataService.filter.isLactoseFree = value;
             }));
   }
 }

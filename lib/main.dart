@@ -48,7 +48,7 @@ class App extends StatelessWidget {
         Routs.categories: (ctx) => const CategoriesScreen(),
         Routs.categoryMeals: (ctx) => CategoryMealsScreen(dataService: dataService),
         Routs.mealDetail: (ctx) => const MealDetailScreen(),
-        Routs.filters: (ctx) => const FiltersScreen(),
+        Routs.filters: (ctx) =>  FiltersScreen(dataService: dataService,),
       },
     );
   }
